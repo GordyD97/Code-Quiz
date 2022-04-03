@@ -1,3 +1,59 @@
+body {
+    background-color: #221858;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+   
+
+}
+#startBttn{ 
+    background-color: #004400;
+    color: white;
+    width: 245px;
+    height: 100px;
+    border-radius: 45px;
+
+}
+
+header{
+
+}
+
+
+aside{
+
+}
+
+.quizBox{
+background-color: blue;
+display: flex;
+flex-direction:row;
+flex-wrap: wrap;
+
+
+}  
+.answers{
+    /* background-color: black; */
+    display: flex;
+    flex-direction: column;
+}
+
+.answerbtn{
+    background-color: black;
+    margin: 5px;
+    border: 10px;
+    padding: 10px;
+    border-radius: 25px;
+    color: white;
+
+
+
+}
+
+
+
 /* GIVEN I am taking a code quiz
 WHEN I click the start button
 THEN a timer starts and I am presented with a question
