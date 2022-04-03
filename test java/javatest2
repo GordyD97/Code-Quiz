@@ -3,6 +3,7 @@ const choices = document.querySelectorAll('.choice-text');
 const progresstext = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
 const progressBarFull = document.querySelector('#progressBarFull');
+const startBttn = document.querySelector('#startBttn')
 
 let currentQuestion = {}
 let acceptingAnswers = true
@@ -53,16 +54,38 @@ getNextQuestion = () => {
   }
 
   questionCounter++
-  progresstext.innertext = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+  progresstext.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
   progressBarFull.getElementsByClassName.width = `${(questionCounter/MAX_QUESTIONS) *100}%`
   
   const questionsIndex = Math.floor(Math.random() * availableQuestion.length)
   currentQuestion = availableQuestion[questionsIndex]
   question.innerText = currentQuestion.question
 
-  choices.forEach(choice => {
-    const number = choice.dataset['number']
-    choice.innerText = currentQuestion['choice' + number]
+  console.log(currentQuestion);
+  
+  choices.forEach((choice, number) => {
+    choice.innerText = currentQuestion['choices'][number];
+
+    choice.addEventListener('click', e => { 
+      if(!acceptingAnswers) return
+  
+      acceptingAnswers = false
+      const selectedChoice = e.target
+      const selectedAnsers = selectedChoice.dataset['number']
+  
+      let classToApply = selectedAnsers == currentQuestion.answer ? 'correct' : 'incorrect'
+      
+      if(classToApply === 'correct') {
+            incrementScore(SCORE_POINTS)
+      }
+  
+      selectedChoice.parentElement.classList.add(classToApply)
+  
+      setTimeout(() => {    
+          selectedChoice.parentElement.classList.remove(classToApply)
+          getNextQuestion()
+      }, 1000)
+    })
   })
 
   availableQuestion.splice(questionsIndex, 1)
@@ -70,33 +93,12 @@ getNextQuestion = () => {
   acceptingAnswers = true
 }
 
-choices.forEach(choice =>{ 
-  choice.addEventListener('click', e => { 
-    if(!acceptingAnswers) return
-
-    acceptingAnswers = false
-    const selectedChoice = e.target
-    const selectedAnsers = selectedChoice.dataset['number']
-
-    let classToApply = selectedAnsers == currentQuestion.answer ? 'correct' : 'incorrect'
-    
-    if(classToApply === 'correct') {
-          incrementScore(SCORE_POINTS)
-    }
-
-    selectedChoice.parentElement.classList.add(classToApply)
-
-    setTimeout(() => {    
-        selectedChoice.parentElement.classList.remove(classToApply)
-        getNextQuestion()
-    }, 1000)
-  })
-})
-
 
 incrementScore = num => {
   score +=num 
   scoreText.innerText = score
 }
 
-startGame()
+startBttn.addEventListener('click', (event) => {
+  startGame();
+});
