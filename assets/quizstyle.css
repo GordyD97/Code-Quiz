@@ -5,54 +5,84 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
-   
+
 
 }
-#startBttn{ 
+
+#startBttn {
     background-color: #004400;
     color: white;
     width: 245px;
     height: 100px;
+    border-width: 5px;
     border-radius: 45px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #FFF100;
+    box-shadow: 12px 12px 2px 1px rgba(15.7,44.7, 40.8);
 
 }
 
-header{
-
-}
+header {}
 
 
-aside{
+aside {}
 
-}
-
-.quizBox{
-background-color: blue;
-display: flex;
-flex-direction:row;
-flex-wrap: wrap;
-
-
-}  
-.answers{
-    /* background-color: black; */
+.quizBox {
+    background-color: blue;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    margin: 5px;
+    border: 10px;
+    padding: 10px;
+    border-radius: 25px;
+    color: #FFF100;
+    font-weight: bold;
+    font-size: 20px;
+
+
 }
 
-.answerbtn{
+/* #choices{
+    /* background-color: black; */
+/* display: flex;
+    flex-direction: column;
     background-color: black;
     margin: 5px;
     border: 10px;
     padding: 10px;
     border-radius: 25px;
-    color: white;
+    color: #FFF100;
+    */
+/* } */
 
+.choice-text {
+    background-color: black;
+    margin: 5px;
+    border: 10px;
+    padding: 10px;
+    border-radius: 65px;
+    color: white;
+    box-shadow: 30px;
+    color: #FFF100;
 
 
 }
 
+.submitbttn{
+    background-color: #004400;
+        color: white;
+        width: 245px;
+        height: 100px;
+        border-width: 5px;
+        border-radius: 45px;
+        font-size: 25px;
+        font-weight: bold;
+        color: #FFF100;
+        box-shadow: 12px 12px 2px 1px rgba(15.7, 44.7, 40.8);
 
+}
 
 /* GIVEN I am taking a code quiz
 WHEN I click the start button
