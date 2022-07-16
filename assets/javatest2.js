@@ -36,8 +36,17 @@ var questions = [
 
 //create a start quiz/ submit quiz button funciton
 // function startquiz();
+// question next will be a call back
+    // dont have to define it now
 
-
+const createAnswerButton = (textContent, rightBool, questionNext) =>{
+   var button = document.createElement('button')
+   button.setAttribute('data-correct', rightBool)
+   button.textContent = textContent;
+   button.addEventListener('click', questionNext)
+   return button; 
+};
+let questionIndex = 0
 const startQuiz = () => {
     var element = document.getElementById("startBttn");
     element.parentNode.removeChild(startBttn);
@@ -59,8 +68,33 @@ const startQuiz = () => {
 
     document.body.appendChild(questionContainer);
     document.body.appendChild(answerContainer);
-    document.body.appendChild(divcontainername);
-    document.createElement();
+    document.body.appendChild(div);
+    // adding answers to answer container
+    for (let i=0; i< questions[questionIndex].choices.length; i++){ 
+        let textContent = questions[questionIndex].choices[i]
+        let rightBool = questions[questionIndex].answer === i
+        let answerButton = createAnswerButton(
+            textContent,rightBool, function(){
+                // if rightBool{
+                //     // add to the right count
+                // }
+                // else
+                console.log(rightBool);
+                console.log(textContent);
+                console.log(questionIndex+1);
+            }
+        );
+        answerContainer.append(answerButton);
+    }
+
+    
+    
+    // crteate element update attributes then append to page
+        // create element tag that will be empty inside of it 
+            // text content* 
+                // each button has to have a specific value/data attribute for right or wrong 
+    
+
 
 //   add question and anwer container
 
@@ -69,6 +103,7 @@ const startQuiz = () => {
         
 };
 
+ 
 // next task to acess each one after it is selected
 // iterator ++ after the ansewr is selected 
 
