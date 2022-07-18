@@ -59,7 +59,7 @@ aside {}
 /* } */
 
 .choice-text {
-    background-color: #004400;;
+    background-color: #004400;
     margin: 5px;
     border: 10px;
     padding: 10px;
@@ -84,6 +84,18 @@ aside {}
         color: #FFF100;
         box-shadow: 12px 12px 2px 1px rgba(0, 0, 0);
 
+}
+
+button{
+    background-color: #004400;
+        margin: 5px;
+        border: 10px;
+        padding: 10px;
+        border-radius: 65px;
+        color: white;
+        box-shadow: 30px;
+        color: #FFF100;
+        box-shadow: 6px 6px 1px .5px rgba(0, 0, 0);
 }
 
 /* GIVEN I am taking a code quiz
