@@ -1,8 +1,14 @@
 let startBttn = document.getElementById('startBttn');
 let submitbttn = document.getElementById('submitbttn');
+// let timerEl = document.getElementById('timer');
+let tunerEl = document.querySelector('timer');
+const answerContainer = document.createElement('p');
+let currentQuestionsIndex = 0;
+
 
 // get dom object variables 
 
+let score = 0;
 // create a question array 
 var questions = [
     {
@@ -37,29 +43,46 @@ var questions = [
 // question next will be a call back
 // dont have to define it now
 
+
+function clockTick() {
+    secLeft--;
+    timeEl.textContent = "Time: " + secLeft;
+
+    // Conditions when users running out of time 
+    if (secLeft <= 0) {
+        // timeEl.textContent = "";
+        clearInterval(secLeft);
+
+        quizEnd();
+    }
+}
+
 const createAnswerButton = (textContent, rightBool, questionNext) => {
-    var button = document.createElement('button')
+    let button = document.createElement('button')
     button.setAttribute('data-correct', rightBool)
     button.textContent = textContent;
     button.addEventListener('click', questionNext)
     return button;
 };
 let questionIndex = 0
+let timerId;
 const startQuiz = () => {
-    var element = document.getElementById("startBttn");
+    let element = document.getElementById("startBttn");
     element.parentNode.removeChild(startBttn);
     // function to remove button when clickd 
 
     // creating question container
     const div = document.createElement("div");
     div.children[0];
+    // creating timer
+    timerId = setInterval(clockTick, 1000);
 
 
     const questionContainer = document.createElement("h1");
     questionContainer.innerText = questions[0].question;
     // create for loop
     // for(var questions= 0; questions< 0; questions++)
-    const answerContainer = document.createElement('p');
+    // const answerContainer = document.createElement('p');
     answerContainer.textcontent = questions[0].choices;
     console.log(questionContainer);
 
@@ -67,6 +90,7 @@ const startQuiz = () => {
     document.body.appendChild(questionContainer);
     document.body.appendChild(answerContainer);
     document.body.appendChild(div);
+    document.body.appendChild(timer);
     // adding answers to answer container
     // creating the answer button 
     for (let i = 0; i < questions[questionIndex].choices.length; i++) {
@@ -98,9 +122,9 @@ const startQuiz = () => {
     //   add question and anwer container
 
     // console.log('hello test')
-    loadNext();
+    
 
-};
+}; 
 
 // const loadNext = () => {
 // let currentQuestion = questions[0]
@@ -108,23 +132,87 @@ const startQuiz = () => {
 
 // answerContainer.innerText = "";
 // };
+// load next on button 
+// const loadNext = () => {
+//     questionIndex++;
+//     for (let i = 0; i < questions[questionIndex].choices.length; i++) {
+//         let textContent = questions[questionIndex].choices[i]
+//         let rightBool = questions[questionIndex].answer === i
+//         let answerButton = createAnswerButton(
+//             textContent, rightBool, function () {
+//                 // if rightBool{
+//                 //     // add to the right count
+//                 // }
+//                 // else
+//                 // console.log(rightBool);
+//                 console.log(textContent);
+//                 console.log(questionIndex + 1);
+//             }
+//         );
+//         answerContainer.append(answerButton);
+//     }
+
 const loadNext = () => {
-    for (let i = 0; i < questions[questionIndex].choices.length; i++) {
-        let textContent = questions[questionIndex].choices[i]
-        let rightBool = questions[questionIndex].answer === i
-        let answerButton = createAnswerButton(
-            textContent, rightBool, function () {
-                // if rightBool{
-                //     // add to the right count
-                // }
-                // else
-                console.log(rightBool);
-                console.log(textContent);
-                console.log(questionIndex + 1);
-            }
-        );
-        answerContainer.append(answerButton);
+    // showQs(randomizedQs,[questionIndexNow]); 
+
+    let currentQuestion = questions[questionIndexNow];
+
+    let questionEl = document.getElementById('question');
+    questionEl.textContent = currentQuestion.question;
+    answerEl.innerHTML = "";
+
+    currentQuestion.choices.forEach(function (choice) {
+        let choiceNode = document.createElement('button');
+        choiceNode.setAttribute('class', 'choice');
+        choiceNode.setAttribute('value', choices);
+        choiceNode.textContent = choices;
+
+        choiceNode.onclick = loadNext;
+        answerEl.appendChild(choiceNode);
+    })
+}
+    
+
+
+const questionClick = () => {
+    if (this.value !== questions[questionIndex].answer) {
+        // seconds left???
+        if (secLeft <= 0) {
+            // secLeft = 0
+            clearInterval(secLeft);
+        }
+        timeEl.textContent = "Time:" == secLeft;
+        scoreEl.textContent = "score:" == score;
+        feedbackEl.textContent = "INCORRECT! TIME DEDUCT.";
     }
+    else {
+    score += 20;
+    scoreEl.textContent = "score: " + score;
+    feedbackEl.textContent = "Good Job keep it up!";
+    }
+feedbackEl.setAttribute('class', 'feedback');
+setTimeout(function () {
+    feedbackEl.setAttribute('class', 'feedback hide');
+
+}, 1000);
+ 
+// loadNext();
+// questionIndex++;
+// if (questionIndex === questions.length) {
+//     submitQuiz();
+//     clearInterval(timerId);
+//     timeEl.textContent = "";
+// }
+// else {
+//     loadNext();
+// }
+    loadNext();
+}
+
+const submitQuiz = () => {
+    document.body(questionContainer).add('hide');
+    document.body(answerContainer).add('hide');
+    document.body(div).add('hide');
 }
 // for (let i = 0; i < currentQuestion.choices.length; i++) {
 
@@ -135,4 +223,5 @@ const loadNext = () => {
 
 startBttn.addEventListener('click', startQuiz);
 
-submitQuiz => { };
+submitbttn.addEventListener('click', startQuiz);
+
