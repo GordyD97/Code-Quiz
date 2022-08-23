@@ -40,8 +40,9 @@ body {
 }
 
 p {
-   background-color: #ffffff;
+    background-color: #ffffff;
   padding: 10px;
+  width: 50px;
 }
 
 .quiz-container {
