@@ -15,7 +15,7 @@ let score = 0
 let interval;
 
 // proposing questions 
-var questions = [
+var quizData = [
     {
         question: "What does CSS mean?",
         choices: ["Cascasding style sheets", "Coopers silly sling-shot", "Capiitol surf statement", "Cornering safe storks"],
